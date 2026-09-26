@@ -1,0 +1,23 @@
+[project]
+name = "marker-telegram-bot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "rustle", email = "shelterr0103@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "aiogram>=3.31.0",
+    "fastapi>=0.141.1",
+    "pydantic-settings>=2.15.0",
+    "python-dotenv>=1.2.3",
+    "uvicorn>=0.54.0",
+]
+
+[project.scripts]
+marker-telegram-bot = "marker_telegram_bot:main"
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
