@@ -4,7 +4,9 @@ from sqlalchemy.orm import DeclarativeBase
 from src.marker_telegram_bot.core.config import settings
 
 engine = create_async_engine(url=settings.DATABASE_URL)
-AsyncSessionLocal = async_sessionmaker(engine, class_=AsyncSession)
+AsyncSessionLocal = async_sessionmaker(
+    engine, class_=AsyncSession, expire_on_commit=False
+)
 
 
 class Base(DeclarativeBase):
