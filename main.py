@@ -4,6 +4,7 @@ import sys
 
 from aiogram import Bot, Dispatcher
 
+from src.marker_telegram_bot.bot.handlers.goals import router as goals_router
 from src.marker_telegram_bot.bot.handlers.menu import router as menu_router
 from src.marker_telegram_bot.core.config import settings
 
@@ -15,6 +16,7 @@ async def main() -> None:
     dp = Dispatcher()
 
     dp.include_router(menu_router)
+    dp.include_router(goals_router)
 
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
