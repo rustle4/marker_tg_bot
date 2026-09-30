@@ -24,21 +24,10 @@ class User(Base):
     telegram_id: Mapped[int] = mapped_column(
         BigInteger, unique=True, index=True, nullable=False
     )
-    username: Mapped[str] = mapped_column(String, nullable=True)
-
-    goals: Mapped[list[Goal]] = relationship(
-        back_populates="user", cascade="all, delete-orphan"
-    )
-    notes: Mapped[list[Note]] = relationship(
-        back_populates="user", cascade="all, delete-orphan"
-    )
-    habits: Mapped[list[Habit]] = relationship(
-        back_populates="user", cascade="all, delete-orphan"
-    )
-    pomodoro_sessions: Mapped[list[Pomodoro]] = relationship(
-        back_populates="user", cascade="all, delete-orphan"
-    )
-
+    username: Mapped[str | None] = mapped_column(String, nullable=True)
+    first_name: Mapped[str | None] = mapped_column(String, nullable=True)
+    last_name: Mapped[str | None] = mapped_column(String, nullable=True)
+    
 
 class Goal(Base):
     __tablename__ = "goals"
