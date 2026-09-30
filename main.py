@@ -4,8 +4,8 @@ import sys
 
 from aiogram import Bot, Dispatcher
 
-from app.bot.handlers.goals import router as goals_router
-from app.bot.handlers.menu import router as menu_router
+from app.bot.goals import router as goals_router
+from app.bot.menu import router as menu_router
 from app.core.config import settings
 
 logging.basicConfig(level=logging.INFO, stream=sys.stdout)
