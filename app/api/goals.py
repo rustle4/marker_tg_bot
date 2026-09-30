@@ -1,3 +1,5 @@
+from typing import Annotated
+
 from core.database import get_db
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
@@ -10,7 +12,7 @@ router = APIRouter(prefix="/goals", tags=["Goals"])
 
 
 @router.get("/{telegram_id}")
-async def get_goals(telegram_id: int, db: AsyncSession = Depends(get_db)):
+async def get_goals(telegram_id: int, db: Annotated[AsyncSession, Depends(get_db)]):
     result = await db.execute(
         select(Goal)
         .where(Goal.telegram_id == telegram_id)
@@ -20,7 +22,7 @@ async def get_goals(telegram_id: int, db: AsyncSession = Depends(get_db)):
 
 
 @router.post("", status_code=status.HTTP_201_CREATED)
-async def create_goal(data: GoalCreate, db: AsyncSession = Depends(get_db)):
+async def create_goal(data: GoalCreate, db: Annotated[AsyncSession, Depends(get_db)]):
     goal = Goal(user_id=data.telegram_id, title=data.title)
     db.add(goal)
     await db.commit()
@@ -29,7 +31,7 @@ async def create_goal(data: GoalCreate, db: AsyncSession = Depends(get_db)):
 
 
 @router.patch("/{goal_id}/toggle")
-async def toggle_goal(goal_id: int, db: AsyncSession = Depends(get_db)):
+async def toggle_goal(goal_id: int, db: Annotated[AsyncSession, Depends(get_db)]):
     goal = await db.get(Goal, goal_id)
     if not goal:
         raise HTTPException(status_code=404, detail="Goal not found")
@@ -39,7 +41,7 @@ async def toggle_goal(goal_id: int, db: AsyncSession = Depends(get_db)):
 
 
 @router.delete("/{goal_id}")
-async def delete_goal(goal_id: int, db: AsyncSession = Depends(get_db)):
+async def delete_goal(goal_id: int, db: Annotated[AsyncSession, Depends(get_db)]):
     goal = await db.get(Goal, goal_id)
     if goal:
         await db.delete(goal)
