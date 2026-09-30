@@ -4,9 +4,9 @@ import sys
 
 from aiogram import Bot, Dispatcher
 
-from src.marker_telegram_bot.bot.handlers.goals import router as goals_router
-from src.marker_telegram_bot.bot.handlers.menu import router as menu_router
-from src.marker_telegram_bot.core.config import settings
+from app.bot.handlers.goals import router as goals_router
+from app.bot.handlers.menu import router as menu_router
+from app.core.config import settings
 
 logging.basicConfig(level=logging.INFO, stream=sys.stdout)
 

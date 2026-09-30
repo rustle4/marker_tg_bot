@@ -3,8 +3,8 @@ from aiogram.filters import CommandStart
 from aiogram.types import Message
 from sqlalchemy import select
 
-from src.marker_telegram_bot.app.models import User
-from src.marker_telegram_bot.core.database import AsyncSessionLocal
+from app.core.database import AsyncSessionLocal
+from app.models import User
 
 router = Router()
 

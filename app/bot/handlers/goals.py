@@ -6,10 +6,10 @@ from aiogram.types import (
     InlineKeyboardMarkup,
     Message,
 )
+from core.database import AsyncSessionLocal
 from sqlalchemy import select, update
 
-from src.marker_telegram_bot.app.models import Goal, User
-from src.marker_telegram_bot.core.database import AsyncSessionLocal
+from app.models import Goal, User
 
 router = Router()
 

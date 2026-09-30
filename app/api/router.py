@@ -1,9 +1,9 @@
+from api.notes import router as notes_router
 from fastapi import APIRouter
 
-from src.marker_telegram_bot.app.api.goals import router as goals_router
-from src.marker_telegram_bot.app.api.habits import router as habits_router
-from src.marker_telegram_bot.app.api.notes import router as notes_router
-from src.marker_telegram_bot.app.api.pomodoro import router as pomodoro_router
+from app.api.goals import router as goals_router
+from app.api.habits import router as habits_router
+from app.api.pomodoro import router as pomodoro_router
 
 api_router = APIRouter(prefix="/api")
 

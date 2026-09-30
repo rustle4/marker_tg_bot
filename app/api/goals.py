@@ -1,10 +1,10 @@
+from core.database import get_db
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.marker_telegram_bot.app.models import Goal
-from src.marker_telegram_bot.app.schemas import GoalCreate
-from src.marker_telegram_bot.core.database import get_db
+from app.models import Goal
+from app.schemas import GoalCreate
 
 router = APIRouter(prefix="/goals", tags=["Goals"])
 
