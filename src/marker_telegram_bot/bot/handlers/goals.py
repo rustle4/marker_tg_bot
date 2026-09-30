@@ -8,7 +8,7 @@ from aiogram.types import (
 )
 from sqlalchemy import select, update
 
-from src.marker_telegram_bot.app.models import Goals, User
+from src.marker_telegram_bot.app.models import Goal, User
 from src.marker_telegram_bot.core.database import AsyncSessionLocal
 
 router = Router()
@@ -37,7 +37,7 @@ async def set_goal(message: Message) -> None:
             user = User(telegram_id=user_id, username=message.from_user.username)
             session.add(user)
 
-        new_goal = Goals(telegram_id=user_id, title=goal_name)
+        new_goal = Goal(telegram_id=user_id, title=goal_name)
         session.add(new_goal)
         await session.commit()
 
@@ -47,8 +47,8 @@ async def set_goal(message: Message) -> None:
 @router.message(Command("goals"))
 async def show_goals(message: Message) -> None:
     async with AsyncSessionLocal() as session:
-        statement = select(Goals).where(
-            Goals.telegram_id == message.from_user.id, Goals.is_achieved == False
+        statement = select(Goal).where(
+            Goal.telegram_id == message.from_user.id, Goal.is_achieved == False
         )
         result = await session.execute(statement)
         goals = result.scalars().all()
@@ -75,7 +75,7 @@ async def goal_achieved_callback(callback: CallbackQuery) -> None:
     goal_id = int(callback.data.split("_")[1])
 
     async with AsyncSessionLocal() as session:
-        statement = update(Goals).where(Goals.id == goal_id).values(is_achieved=True)
+        statement = update(Goal).where(Goal.id == goal_id).values(is_achieved=True)
         await session.execute(statement)
         await session.commit()
 
