@@ -6,6 +6,7 @@ class Settings(BaseSettings):
     DATABASE_URL: str
     TELEGRAM_INIT_DATA_MAX_AGE_SECONDS: int = 86_400
     ALLOW_DEV_AUTH: bool = False
+    WEB_APP_URL: str
 
     model_config = SettingsConfigDict(
         env_file=".env",
